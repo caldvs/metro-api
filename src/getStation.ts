@@ -20,6 +20,7 @@ export const station = async (stationId: string) => {
     };
     const filtered = data.data.value.filter((station) => station.TLAREF === stationId)
     const destinations = Array.from(new Set(filtered.map((pid) => [pid.Dest0, pid.Dest1, pid.Dest2, pid.Dest3]).flat().filter(Boolean)));
+    const messages = _.uniq(filtered.map((each) => each.MessageBoard));
 
     const departuresSorted = destinations.map((destination) => {
         const destinationsAndWaits = pickDestinationAndWait(filtered).map((departure) => {
@@ -30,10 +31,9 @@ export const station = async (stationId: string) => {
             mins: _.sortedUniq(destinationsAndWaits)
         }
     });
-
     return {
         departures: departuresSorted,
-        messages: ['hi'],
+        messages,
         firstAndLast: ['06:00', '23:59']
     }
 }
