@@ -12,7 +12,8 @@ export const stations = async () => {
                 if (pid[dests[e]]) {
                     return {
                         destination: pid[dests[e]],
-                        wait: pid[waits[e]]
+                        wait: pid[waits[e]],
+                        stationOrigin: pid.StationLocation
                     };    
                 }
             })
@@ -21,18 +22,18 @@ export const stations = async () => {
     const destinations = Array.from(new Set(data.data.value.map((pid) => [pid.Dest0, pid.Dest1, pid.Dest2, pid.Dest3]).flat().filter(Boolean)));
     const departuresSorted = destinations.map((destination) => {
         const destinationsAndWaits = pickDestinationAndWait(data.data.value).map((departure) => {
-            return departure.destination === destination && Number(departure.wait);
+            return departure.destination === destination && [Number(departure.wait), departure.stationOrigin];
          }).filter(Boolean)
-        const mins = _.sortedUniq(destinationsAndWaits);
-        const mean = _.round(_.mean(mins), 0).toFixed(0)
+        const mins = _.uniq(destinationsAndWaits);
+        const mean = _.round(_.mean(mins.map((min) => min[0])), 0).toFixed(0)
         console.log("🚀 | file: getAllStations.ts | line 34 |", {
             destination,
-            mins: _.sortedUniq(destinationsAndWaits),
+            mins: _.uniq(destinationsAndWaits),
             mean
         })
         return {
             destination,
-            mins: _.sortedUniq(destinationsAndWaits),
+            mins: _.uniq(destinationsAndWaits),
             mean
         }
     });
