@@ -8,14 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-module.exports.station = (event) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("🚀 | file: handler.ts | line 4 | event", event);
-    // const data = getStation(stationId: string);
+Object.defineProperty(exports, "__esModule", { value: true });
+const getStation_1 = require("./src/getStation");
+module.exports.station = ({ pathParameters: { stationId } }) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = (0, getStation_1.station)(stationId);
     return {
         statusCode: 200,
         body: JSON.stringify({
             message: "Go Serverless v3.0! Your function executed successfully!",
-            input: event,
+            data,
         }, null, 2),
     };
 });

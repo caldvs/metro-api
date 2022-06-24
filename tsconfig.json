@@ -3,6 +3,7 @@
       "target": "es6",
       "lib": ["es2020", "dom"],
       "module": "commonjs",
+      "moduleResolution": "node",
       "outDir": ".build",
       "esModuleInterop": true,
       "forceConsistentCasingInFileNames": true,

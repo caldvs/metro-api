@@ -2,15 +2,19 @@ org: cdavies93
 app: metro-api
 service: metro-api
 frameworkVersion: '3'
+useDotenv: true
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-dotenv-plugin
 
 provider:
   name: aws
   runtime: nodejs14.x
   region: eu-west-2
   stage: dev
+  environment:
+    TFGM_KEY: ${env:TFGM_KEY}
 
 functions:
   station:

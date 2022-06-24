@@ -1,14 +1,14 @@
 "use strict";
+import { station } from './src/getStation';
 
-module.exports.station = async (event) => {
-  console.log("🚀 | file: handler.ts | line 4 | event", event)
-  // const data = getStation(stationId: string);
+module.exports.station = async ({ pathParameters: { stationId }}) => {
+  const data = station(stationId);
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
         message: "Go Serverless v3.0! Your function executed successfully!",
-        input: event,
+        data,
       },
       null,
       2
