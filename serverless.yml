@@ -15,6 +15,7 @@ provider:
   stage: dev
   environment:
     TFGM_KEY: ${env:TFGM_KEY}
+    stageEnv: ${opt:stage, self:provider.stage}
 
 functions:
   station:
