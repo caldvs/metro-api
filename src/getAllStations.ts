@@ -26,15 +26,10 @@ export const stations = async () => {
          }).filter(Boolean)
         const mins = _.uniq(destinationsAndWaits);
         const mean = _.round(_.mean(mins.map((min) => min[0])), 0).toFixed(0)
-        console.log("🚀 | file: getAllStations.ts | line 34 |", {
-            destination,
-            mins: _.uniq(destinationsAndWaits),
-            mean
-        })
         return {
             destination,
+            mean,
             mins: _.uniq(destinationsAndWaits),
-            mean
         }
     });
     return {
