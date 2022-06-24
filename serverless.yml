@@ -1,0 +1,21 @@
+org: cdavies93
+app: metro-api
+service: metro-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  station:
+    handler: handler.station
+    events:
+      - httpApi:
+          path: /{stationId}
+          method: get
+          request:
+            parameters:
+              paths:
+                stationId: true
+          cors: true
