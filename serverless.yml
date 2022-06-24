@@ -3,9 +3,14 @@ app: metro-api
 service: metro-api
 frameworkVersion: '3'
 
+plugins:
+  - serverless-plugin-typescript
+
 provider:
   name: aws
   runtime: nodejs14.x
+  region: eu-west-2
+  stage: dev
 
 functions:
   station:
@@ -14,8 +19,3 @@ functions:
       - httpApi:
           path: /{stationId}
           method: get
-          request:
-            parameters:
-              paths:
-                stationId: true
-          cors: true

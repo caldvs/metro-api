@@ -5,9 +5,18 @@
   "main": "handler.js",
   "scripts": {
     "build:ts": "tsc --incremental",
-    "invoke:station": "run-s build serverless invoke local --function status",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "invoke:station": "npm run-s build:ts && serverless invoke local --function station --data '{ \"pathParameters\": {\"stationId\":\"PIC\"}}'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "npm run-s build:ts && serverless deploy --stage dev"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "got": "^12.1.0",
+    "serverless": "^3.19.0"
+  },
+  "devDependencies": {
+    "serverless-plugin-typescript": "^2.1.2",
+    "typescript": "^4.7.4"
+  }
 }

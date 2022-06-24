@@ -1,6 +1,8 @@
 "use strict";
 
 module.exports.station = async (event) => {
+  console.log("🚀 | file: handler.ts | line 4 | event", event)
+  // const data = getStation(stationId: string);
   return {
     statusCode: 200,
     body: JSON.stringify(
