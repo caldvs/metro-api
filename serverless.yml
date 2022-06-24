@@ -24,3 +24,9 @@ functions:
       - httpApi:
           path: /{stationId}
           method: get
+  stations:
+    handler: handler.stations
+    events:
+      - httpApi:
+          path: /stations
+          method: get

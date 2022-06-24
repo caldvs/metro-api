@@ -5,6 +5,7 @@
   "scripts": {
     "build:ts": "tsc --incremental",
     "invoke:station": "npm run-s build:ts && serverless invoke local --function station --data '{ \"pathParameters\": {\"stationId\":\"SPS\"}}'",
+    "invoke:stations": "npm run-s build:ts && serverless invoke local --function stations",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "npm run-s build:ts && serverless deploy --stage dev"
   },
