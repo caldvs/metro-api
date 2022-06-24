@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const fetch = async (station: string = '') => {
-	let url = station ? `https://api.tfgm.com/odata/Metrolinks` : `https://api.tfgm.com/odata/Metrolinks` ;
+export const fetch = async () => {
+	let url = `https://api.tfgm.com/odata/Metrolinks`;
 	const headers = {
 		'Access-Control-Allow-Origin': '*',
 		'Access-Control-Allow-Credentials': 'true',

@@ -2,16 +2,9 @@
 import { station } from './src/getStation';
 
 module.exports.station = async ({ pathParameters: { stationId }}) => {
-  const data = station(stationId);
+  const data = await station(stationId);
   return {
     statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: "Go Serverless v3.0! Your function executed successfully!",
-        data,
-      },
-      null,
-      2
-    ),
+    body: JSON.stringify({data}, null, 2),
   };
 };

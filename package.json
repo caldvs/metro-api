@@ -4,7 +4,7 @@
   "main": "handler.js",
   "scripts": {
     "build:ts": "tsc --incremental",
-    "invoke:station": "npm run-s build:ts && serverless invoke local --function station --data '{ \"pathParameters\": {\"stationId\":\"PIC\"}}'",
+    "invoke:station": "npm run-s build:ts && serverless invoke local --function station --data '{ \"pathParameters\": {\"stationId\":\"SPS\"}}'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "npm run-s build:ts && serverless deploy --stage dev"
   },
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
+    "lodash": "^4.17.21",
     "serverless": "^3.19.0"
   },
   "devDependencies": {
