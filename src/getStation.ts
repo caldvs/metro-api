@@ -23,11 +23,11 @@ export const station = async (stationId: string) => {
 
     const departuresSorted = destinations.map((destination) => {
         const destinationsAndWaits = pickDestinationAndWait(filtered).map((departure) => {
-            return departure.destination === destination && departure.wait;
+            return departure.destination === destination && Number(departure.wait);
          }).filter(Boolean)
         return {
             destination,
-            wait: _.sortedUniq(destinationsAndWaits)
+            mins: _.sortedUniq(destinationsAndWaits)
         }
     });
 
