@@ -17,12 +17,14 @@ Serverless API endpoint for Metrolink data
 ## Usage
 
 Public gateway URLs:
+
 dev: `https://vc3rds0ko2.execute-api.eu-west-2.amazonaws.com/{path}`
+
 prod: `https://vh8bmjelah.execute-api.eu-west-2.amazonaws.com/{path}`
 
 ### Available paths
 
-- `/{stationId}` e.g. `SPS`, `NIS`, 'CNK`
+- `/{stationId}` e.g. `SPS`, `NIS`, `CNK`
 - `/stations`
 
 
