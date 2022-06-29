@@ -32,7 +32,7 @@ export const station = async (stationId: string) => {
         }
     });
     return {
-        version: `metro-api-${process.env.stageEnv}`,
+        version: `metro-api-${process.env.environment}`,
         departures: departuresSorted,
         messages,
         firstAndLast: ['06:00', '23:59']

@@ -33,7 +33,7 @@ export const stations = async () => {
         }
     });
     return {
-        version: `metro-api-${process.env.stageEnv}`,
+        version: `metro-api-${process.env.environment}`,
         network: departuresSorted
     }
 }
