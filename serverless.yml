@@ -20,6 +20,7 @@ provider:
 functions:
   station:
     handler: handler.station
+    url: true
     events:
       - httpApi:
           path: /{stationId}
@@ -27,6 +28,7 @@ functions:
           cors: true
   stations:
     handler: handler.stations
+    url: true
     events:
       - httpApi:
           path: /stations
