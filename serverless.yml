@@ -17,6 +17,13 @@ provider:
     TFGM_KEY: ${env:TFGM_KEY}
     environment: ${opt:stage, self:provider.stage}
 
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+       - "s3:*"
+      Resource: { "Fn::Join": ["", ["arn:aws:s3:::first-and-last-trams-dev", "/*" ] ] }
+
+
 functions:
   station:
     handler: handler.station
