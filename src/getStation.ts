@@ -5,16 +5,17 @@ import { DeparturesGroupedByDestination } from './transform';
 type StationResponse = {
     version: string;
     departures: DeparturesGroupedByDestination[];
+    messages: string[];
     firstAndLast: string[];
 }
 
 export const station = async (stationId: string): Promise<StationResponse> => {
     const { data } = await fetch();
-    const transformed = transform(data, stationId);
-        
+    const { departures, messages } = transform(data, stationId);
     return {
         version: `metro-api-${process.env.environment}`,
-        departures: transformed,
+        departures,
+        messages,
         firstAndLast: ['06:00', '23:59']
     }
 }
