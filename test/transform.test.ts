@@ -8,7 +8,7 @@ describe("transform", () => {
       const transformed = transform(fullDataResponse, stationId);
       expect(transformed).toEqual({
         departures: [
-          { destination: "Ashton-under-Lyne", mins: [11] },
+          { destination: "Ashton-nder-Lyne", mins: [11] },
           { destination: "Eccles via MediaCityUK", mins: [7, 19] },
         ],
         messages: [
