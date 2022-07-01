@@ -1,7 +1,10 @@
+/* eslint-disable import/extensions */
 import type { StationResponse } from "./types/types";
 
-const { fetch } = require("./fetch.ts");
-const { transform } = require("./transform.ts");
+// eslint-disable-next-line import/no-unresolved
+import fetch from "./fetch";
+// eslint-disable-next-line import/no-unresolved
+import transform from "./transform";
 
 export default async (stationId: string): Promise<StationResponse> => {
   const { data } = await fetch();

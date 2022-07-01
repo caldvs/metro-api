@@ -44,6 +44,8 @@ export type PID = {
 };
 
 export type APIResponse = {
-  "@odata.context": string;
-  value: PID[];
+  data: {
+    "@odata.context": string;
+    value: PID[];
+  };
 };

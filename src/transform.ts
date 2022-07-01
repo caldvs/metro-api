@@ -7,8 +7,7 @@ const WAIT_KEYS = ["Wait0", "Wait1", "Wait2", "Wait3"];
 const TLAREF = "TLAREF";
 const ATCO_CODE = "AtcoCode";
 
-// eslint-disable-next-line import/prefer-default-export
-export const transform = ({ value }, stationId): TransformationResponse => {
+export default ({ value }, stationId): TransformationResponse => {
   const filteredByStationId = value.filter(
     (station) => station[TLAREF] === stationId
   );

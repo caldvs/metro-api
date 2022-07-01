@@ -1,4 +1,4 @@
-const { station } = require("./src/getStation.ts");
+import station from "./src/getStation";
 
 module.exports.station = async ({ pathParameters: { stationId } }) => {
   const data = await station(stationId);
