@@ -6,19 +6,22 @@
     "build:ts": "tsc --incremental",
     "invoke:station": "npm run-s build:ts && serverless invoke local --function station --data '{ \"pathParameters\": {\"stationId\":\"SPS\"}}'",
     "invoke:stations": "npm run-s build:ts && serverless invoke local --function stations",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest",
     "deploy": "npm run-s build:ts && serverless deploy --stage dev"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
+    "jest": "^28.1.2",
     "lodash": "^4.17.21",
     "serverless": "^3.19.0"
   },
   "devDependencies": {
+    "@types/jest": "^28.1.4",
     "serverless-dotenv-plugin": "^4.0.1",
     "serverless-plugin-typescript": "^2.1.2",
+    "ts-jest": "^28.0.5",
     "typescript": "^4.7.4"
   }
 }
