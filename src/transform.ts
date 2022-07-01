@@ -7,7 +7,7 @@ const WAIT_KEYS = ["Wait0", "Wait1", "Wait2", "Wait3"];
 const TLAREF = "TLAREF";
 const ATCO_CODE = "AtcoCode";
 
-export default ({ value }, stationId): TransformationResponse => {
+export const transform = ({ value }, stationId): TransformationResponse => {
   const filteredByStationId = value.filter(
     (station) => station[TLAREF] === stationId
   );

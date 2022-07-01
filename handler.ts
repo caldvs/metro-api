@@ -1,5 +1,5 @@
-import station from "./src/getStation";
-import firstAndLast from "./src/firstAndLast";
+const { station } = require("./src/station.ts");
+const { firstAndLast } = require("./src/firstAndLast.ts");
 
 module.exports.station = async ({ pathParameters: { stationId } }) => {
   const data = await station(stationId);
