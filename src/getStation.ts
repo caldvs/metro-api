@@ -1,14 +1,7 @@
-import type { DeparturesGroupedByDestination } from "./transform";
+import type { StationResponse } from "./types/types";
 
 const { fetch } = require("./fetch.ts");
 const { transform } = require("./transform.ts");
-
-type StationResponse = {
-  version: string;
-  departures: DeparturesGroupedByDestination[];
-  messages: string[];
-  firstAndLast: string[];
-};
 
 export default async (stationId: string): Promise<StationResponse> => {
   const { data } = await fetch();
