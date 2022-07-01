@@ -36,7 +36,7 @@ export const get = async (key) => {
       Key: `${key}.json`,
     };
     const data = (await s3.getObject(params).promise()).Body.toString("utf-8");
-    return data;
+    return JSON.parse(data);
   } catch (error) {
     console.log("Error getting file");
     console.log("error", error);
