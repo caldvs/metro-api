@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { APIResponse } from "./types/types";
 
-export default async (): Promise<APIResponse> => {
+export const fetch = async (): Promise<APIResponse> => {
   const url = "https://api.tfgm.com/odata/Metrolinks";
   const headers = {
     "Access-Control-Allow-Origin": "*",

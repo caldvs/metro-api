@@ -1,5 +1,9 @@
-const { station } = require("./src/station.ts");
-const { firstAndLast } = require("./src/firstAndLast.ts");
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/no-import-module-exports */
+import { station } from "./src/station";
+
+// const station = require("./src/station.ts");
+import { firstAndLast } from "./src/firstAndLast";
 
 module.exports.station = async ({ pathParameters: { stationId } }) => {
   const data = await station(stationId);
