@@ -20,7 +20,7 @@ export const transform = ({value}, stationId): DeparturesGroupedByDestination[] 
                 if (platform[key] == destination) {
                     return Number(platform[WAIT_KEYS[i]]);
                 }
-            }).filter(Boolean);
+            }).filter((min) => min === 0 || min);
         }).flat();
 
         return {
