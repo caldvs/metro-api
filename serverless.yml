@@ -24,11 +24,5 @@ functions:
       - httpApi:
           path: /{stationId}
           method: get
-          cors: true
-  stations:
-    handler: handler.stations
-    events:
-      - httpApi:
-          path: /stations
-          method: get
-          cors: true
+  firstAndLast:
+    handler: handler.firstAndLast

@@ -12,6 +12,7 @@
       "rootDir": "./",
       "noImplicitUseStrict": true
     },
-    "include": ["*.ts", "src/**/*.ts", "tests/**/*.ts", "node_modules/@types/puppeteer/index.d.ts"],
+    "exclude": ["node_modules"],
+    "include": ["*.ts", "src/*.ts", "src/**/*.ts", "tests/**/*.ts"],
   }
   

@@ -1,4 +1,5 @@
 import station from "./src/getStation";
+export * as firstAndLast from "./src/firstAndLast";
 
 module.exports.station = async ({ pathParameters: { stationId } }) => {
   const data = await station(stationId);
