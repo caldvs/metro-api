@@ -1,4 +1,4 @@
-import { allStations, getPath } from "./lib/mapping";
+import { allStations, getPath, codeToDestination } from "./lib/mapping";
 import { save } from "./lib/s3";
 import { getMonthFromString } from "./lib/date";
 
@@ -65,6 +65,7 @@ const scrapePages = async () => {
               if (result[key]) {
                 result[key][destination] = {
                   destination,
+                  fullName: codeToDestination(destination),
                   firstTram,
                   lastTram,
                 };
@@ -73,6 +74,7 @@ const scrapePages = async () => {
                   date: prettyDate,
                   [destination]: {
                     destination,
+                    fullName: codeToDestination(destination),
                     firstTram,
                     lastTram,
                   },

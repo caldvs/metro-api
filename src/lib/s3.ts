@@ -40,6 +40,6 @@ export const get = async (key) => {
   } catch (error) {
     console.log("Error getting file");
     console.log("error", error);
-    return error;
+    return [];
   }
 };
