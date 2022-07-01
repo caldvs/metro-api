@@ -78,11 +78,6 @@ const scrapePages = async () => {
         })
       );
 
-      console.log("🚀 | file: firstAndLast.ts | line 85 |", {
-        code,
-        destinations,
-      });
-
       const data = {
         code,
         destinations,
@@ -93,5 +88,5 @@ const scrapePages = async () => {
 };
 
 export const firstAndLast = async (): Promise<any> => {
-  const firstAndLastTimes = await scrapePages();
+  await scrapePages();
 };
