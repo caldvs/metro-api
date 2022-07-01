@@ -70,6 +70,7 @@ const scrapePages = async () => {
                 };
               } else {
                 result[key] = {
+                  date: prettyDate,
                   [destination]: {
                     destination,
                     firstTram,
