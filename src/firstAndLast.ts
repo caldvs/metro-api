@@ -64,12 +64,14 @@ const scrapePages = async () => {
 
               if (result[key]) {
                 result[key][destination] = {
+                  destination,
                   firstTram,
                   lastTram,
                 };
               } else {
                 result[key] = {
                   [destination]: {
+                    destination,
                     firstTram,
                     lastTram,
                   },
