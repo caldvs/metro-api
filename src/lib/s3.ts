@@ -27,7 +27,9 @@ export const save = async (key, input) => {
   }
 };
 
-export const get = async (bucketName, key) => {
+export const get = async (key) => {
+  const env = process.env.environment;
+  const bucketName = `first-and-last-trams-${env}`;
   try {
     const params = {
       Bucket: bucketName,
