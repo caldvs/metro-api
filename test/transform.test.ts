@@ -1,4 +1,5 @@
-const { transform } = require("../src/transform.ts");
+import transform from "../src/transform";
+
 const fullDataResponse = require("./data/full.json");
 
 describe("transform", () => {
