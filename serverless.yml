@@ -26,3 +26,5 @@ functions:
           method: get
   firstAndLast:
     handler: handler.firstAndLast
+    events:
+      - schedule: rate(5 minutes)
