@@ -9,6 +9,28 @@ const getDestinations = (station, line) => {
   return lines[line].filter((lineStation) => lineStation !== station);
 };
 
+export const destinationToCode = (destination: string): string => {
+  const map = {
+    "Trafford Bar": "TRA",
+    Cornbrook: "COR",
+    Altrincham: "ALT",
+    "Manchester Airport": "MAN",
+    Victoria: "VIC",
+    "The Trafford Centre": "TRC",
+    Piccadilly: "PIC",
+    "East Didsbury": "EDD",
+    Eccles: "ECC",
+    "Eccles via MediaCityUK": "ECC",
+    "Ashton-under-Lyne": "ASH",
+    "Ashton via MCUK": "ASH",
+    "Shaw and Crompton": "SHC",
+    "Rochdale Town Centre": "RTC",
+    Rochdale: "ROC",
+    Bury: "BUR",
+  };
+  return map[destination] || "";
+};
+
 export const codeToDestination = (code) => {
   const map = {
     ECC: "Eccles",
