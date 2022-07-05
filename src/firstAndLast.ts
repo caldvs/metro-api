@@ -1,4 +1,10 @@
-import { allStations, getPath, codeToDestination } from "./lib/mapping";
+import {
+  allStations,
+  allTerminus,
+  stationCodeToPath,
+  codeToDestination,
+  destinationToCode,
+} from "./lib/mapping";
 import { save } from "./lib/s3";
 import { getMonthFromString } from "./lib/date";
 
@@ -17,20 +23,21 @@ type destinationUrls = {
 };
 
 const generateUrl = (start, end) => {
-  const from = getPath(start);
-  const to = getPath(end);
+  const from = stationCodeToPath(start);
+  const to = stationCodeToPath(end);
   return `https://tfgm.com/public-transport/tram/stops/${from}-tram/tram-schedule/${to}-tram#tram-schedule-panel`;
 };
 
 const generatePuppeteerObject = () => {
-  const stationsToScrape = allStations();
-  return Object.values(stationsToScrape).map(({ code, goesTo }) => {
+  return Object.values(allStations).map((code) => {
+    const terminus = allTerminus.filter((t) => t !== code);
     return {
       code,
-      urls: goesTo.map((destination) => {
+      name: codeToDestination(code),
+      urls: terminus.map((t) => {
         return {
-          destination,
-          target: generateUrl(code, destination),
+          destination: codeToDestination(t),
+          target: generateUrl(code, t),
         };
       }),
     };
@@ -39,6 +46,10 @@ const generatePuppeteerObject = () => {
 
 const scrapePages = async () => {
   const puppeteerObject = generatePuppeteerObject();
+  console.log(
+    util.inspect(puppeteerObject, false, null, true /* enable colors */)
+  );
+
   Promise.all(
     puppeteerObject.map(async ({ code, urls }) => {
       const result = {};
@@ -63,13 +74,21 @@ const scrapePages = async () => {
               const lastTram = $(
                 `#first-last-${i} .first-last-times table tbody tr .first-last-last .first-last-departure-time`
               ).text();
+              const changeLocationFirst = $(
+                `#first-last-${i} .first-last-times table tbody tr .first-last-first .first-last-route`
+              ).text();
+              const changeLocationLast = $(
+                `#first-last-${i} .first-last-times table tbody tr .first-last-last .first-last-route`
+              ).text();
 
               if (result[dateKey]) {
                 result[dateKey].services[destination] = {
                   destination,
-                  fullName: codeToDestination(destination),
+                  code: destinationToCode(destination),
                   firstTram,
                   lastTram,
+                  changeLocationFirst,
+                  changeLocationLast,
                 };
               } else {
                 result[dateKey] = {
@@ -77,9 +96,11 @@ const scrapePages = async () => {
                   services: {
                     [destination]: {
                       destination,
-                      fullName: codeToDestination(destination),
+                      code: destinationToCode(destination),
                       firstTram,
                       lastTram,
+                      changeLocationFirst,
+                      changeLocationLast,
                     },
                   },
                 };
