@@ -52,9 +52,11 @@ const scrapePages = async () => {
             range.forEach((i) => {
               const day = $(`#first-last-${i}`);
               const prettyDate = day.children(".first-last-day").text().trim();
-              const dayNumber = prettyDate.split(" ")[1]; // day 3
-              const month = getMonthFromString(prettyDate.split(" ")[2]); // month 7
-              const key = `${dayNumber}-${month}`;
+              const dayNumber = "0".concat(prettyDate.split(" ")[1]).slice(-2);
+              const month = "0"
+                .concat(String(getMonthFromString(prettyDate.split(" ")[2])))
+                .slice(-2); // month 7
+              const dateKey = `${dayNumber}-${month}`;
               const firstTram = $(
                 `#first-last-${i} .first-last-times table tbody tr .first-last-first .first-last-departure-time`
               ).text();
@@ -62,27 +64,30 @@ const scrapePages = async () => {
                 `#first-last-${i} .first-last-times table tbody tr .first-last-last .first-last-departure-time`
               ).text();
 
-              if (result[key]) {
-                result[key][destination] = {
+              if (result[dateKey]) {
+                result[dateKey].services[destination] = {
                   destination,
                   fullName: codeToDestination(destination),
                   firstTram,
                   lastTram,
                 };
               } else {
-                result[key] = {
+                result[dateKey] = {
                   date: prettyDate,
-                  [destination]: {
-                    destination,
-                    fullName: codeToDestination(destination),
-                    firstTram,
-                    lastTram,
+                  services: {
+                    [destination]: {
+                      destination,
+                      fullName: codeToDestination(destination),
+                      firstTram,
+                      lastTram,
+                    },
                   },
                 };
               }
             });
           } catch (error) {
             console.log("🚀 | file: firstAndLast.ts | line 98 | error", error);
+            return false;
           }
         })
       );

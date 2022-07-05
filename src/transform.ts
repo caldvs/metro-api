@@ -29,6 +29,7 @@ export const transform = ({ value }, stationId): TransformationResponse => {
       )
       .flat();
     return {
+      code: stationId,
       destination,
       mins,
     };
