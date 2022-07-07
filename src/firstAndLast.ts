@@ -5,7 +5,7 @@ import {
   codeToDestination,
   destinationToCode,
 } from "./lib/mapping";
-import { save } from "./lib/s3";
+import { save, getOldestFile } from "./lib/s3";
 import { getMonthFromString } from "./lib/date";
 
 const util = require("util");
@@ -28,8 +28,8 @@ const generateUrl = (start, end) => {
   return `https://tfgm.com/public-transport/tram/stops/${from}-tram/tram-schedule/${to}-tram#tram-schedule-panel`;
 };
 
-const generatePuppeteerObject = () => {
-  return Object.values(allStations).map((code) => {
+const generatePuppeteerObject = (stationId: string) => {
+  return [stationId].map((code) => {
     const terminus = allTerminus.filter((t) => t !== code);
     return {
       code,
@@ -44,11 +44,20 @@ const generatePuppeteerObject = () => {
   });
 };
 
+function delay(delayInms) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(2);
+    }, delayInms);
+  });
+}
+
 const scrapePages = async () => {
-  const puppeteerObject = generatePuppeteerObject();
-  console.log(
-    util.inspect(puppeteerObject, false, null, true /* enable colors */)
-  );
+  const oldestStation = await getOldestFile();
+  const puppeteerObject = generatePuppeteerObject(oldestStation);
+  // console.log(
+  //   util.inspect(puppeteerObject, false, null, true /* enable colors */)
+  // );
 
   Promise.all(
     puppeteerObject.map(async ({ code, urls }) => {
@@ -114,6 +123,7 @@ const scrapePages = async () => {
       );
       console.log("🚀 | file: firstAndLast.ts | line 85 | result", result);
       await save(code, result);
+      await delay(5);
     })
   );
 };
