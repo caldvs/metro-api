@@ -20,11 +20,9 @@ provider:
   iam:
     role:
       statements:
-        # Allow functions to list all buckets
         - Effect: Allow
           Action: 's3:ListBucket'
           Resource: '*'
-        # Allow functions to read/write objects in a bucket
         - Effect: Allow
           Action:
             - 's3:GetObject'

@@ -58,8 +58,7 @@ export const get = async (key) => {
     const data = (await s3.getObject(params).promise()).Body.toString("utf-8");
     return JSON.parse(data);
   } catch (error) {
-    console.log("Error getting file");
-    console.log("error", error);
+    console.log("Error getting file", error);
     return [];
   }
 };

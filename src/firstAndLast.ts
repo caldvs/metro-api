@@ -44,20 +44,8 @@ const generatePuppeteerObject = (stationId: string) => {
   });
 };
 
-function delay(delayInms) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(2);
-    }, delayInms);
-  });
-}
-
 const scrapePages = async () => {
   const oldestStation = await getOldestFile();
-  console.log(
-    "🚀 | file: firstAndLast.ts | line 57 | oldestStation",
-    oldestStation
-  );
   const puppeteerObject = generatePuppeteerObject(oldestStation);
   // console.log(
   //   util.inspect(puppeteerObject, false, null, true /* enable colors */)
@@ -120,14 +108,11 @@ const scrapePages = async () => {
               }
             });
           } catch (error) {
-            console.log("🚀 | file: firstAndLast.ts | line 98 | error", error);
-            return false;
+            console.log("🚀 | file: firstAndLast.ts | line 119 | error", error);
           }
         })
       );
-      console.log("🚀 | file: firstAndLast.ts | line 85 | result", result);
       await save(code, result);
-      await delay(5);
     })
   );
 };
