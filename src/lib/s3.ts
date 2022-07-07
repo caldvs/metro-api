@@ -3,8 +3,7 @@ AWS.config.update({ region: "eu-west-2" });
 const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
 export const save = async (key, input) => {
-  const env = process.env.environment;
-  const bucketName = `first-and-last-trams-${env}`;
+  const bucketName = `first-and-last-trams-dev`;
   try {
     s3.upload(
       {
@@ -50,8 +49,7 @@ export const getOldestFile = async (): Promise<string> => {
 };
 
 export const get = async (key) => {
-  const env = process.env.environment;
-  const bucketName = `first-and-last-trams-${env}`;
+  const bucketName = `first-and-last-trams-dev`;
   try {
     const params = {
       Bucket: bucketName,

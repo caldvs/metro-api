@@ -8,6 +8,7 @@ plugins:
   - serverless-plugin-typescript
   - serverless-dotenv-plugin
 
+	
 provider:
   name: aws
   runtime: nodejs14.x
@@ -16,16 +17,25 @@ provider:
   environment:
     TFGM_KEY: ${env:TFGM_KEY}
     environment: ${opt:stage, self:provider.stage}
-
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - "s3:*"
-      Resource: "arn:aws:s3:::first-and-last-trams-dev"
-    - Effect: "Allow"
-      Action:
-        - "cloudwatch:PutMetricData"
-      Resource: "*"
+  iam:
+    role:
+      statements:
+        # Allow functions to list all buckets
+        - Effect: Allow
+          Action: 's3:ListBucket'
+          Resource: '*'
+        # Allow functions to read/write objects in a bucket
+        - Effect: Allow
+          Action:
+            - 's3:GetObject'
+            - 's3:PutObject'
+            - 's3:ListObjects'
+          Resource:
+            - 'arn:aws:s3:::first-and-last-trams-dev/*'
+        - Effect: "Allow"
+          Action:
+            - "cloudwatch:PutMetricData"
+          Resource: "*"
 
 functions:
   station:
