@@ -17,6 +17,12 @@ provider:
     TFGM_KEY: ${env:TFGM_KEY}
     environment: ${opt:stage, self:provider.stage}
 
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "cloudwatch:PutMetricData"
+      Resource: "*"
+
 functions:
   station:
     handler: handler.station
@@ -24,11 +30,3 @@ functions:
       - httpApi:
           path: /{stationId}
           method: get
-          cors: true
-  stations:
-    handler: handler.stations
-    events:
-      - httpApi:
-          path: /stations
-          method: get
-          cors: true

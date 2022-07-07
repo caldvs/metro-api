@@ -19,4 +19,4 @@ module.exports = {
     "jest/valid-expect": "error",
     "prettier/prettier": "error",
   },
-}
+};

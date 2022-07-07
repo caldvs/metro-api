@@ -5,8 +5,8 @@
   "scripts": {
     "build:ts": "tsc --incremental",
     "invoke:station": "npm run-s build:ts && serverless invoke local --function station --data '{ \"pathParameters\": {\"stationId\":\"SPS\"}}'",
-    "test": "jest",
-    "lint": "npx eslint src test",
+    "test": "npm run-s build:ts && jest",
+    "lint": "npx eslint .",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "npx prettier src test --check",
     "prettier:fix": "npm run prettier -- --write",
@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1169.0",
     "axios": "^0.27.2",
     "jest": "^28.1.2",
     "lodash": "^4.17.21",
