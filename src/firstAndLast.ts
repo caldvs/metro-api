@@ -54,6 +54,10 @@ function delay(delayInms) {
 
 const scrapePages = async () => {
   const oldestStation = await getOldestFile();
+  // console.log(
+  //   "🚀 | file: firstAndLast.ts | line 57 | oldestStation",
+  //   oldestStation
+  // );
   const puppeteerObject = generatePuppeteerObject(oldestStation);
   // console.log(
   //   util.inspect(puppeteerObject, false, null, true /* enable colors */)

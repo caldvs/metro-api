@@ -32,26 +32,20 @@ export const getOldestFile = async (): Promise<string> => {
   const params = {
     Bucket: bucketName,
   };
-  const p = await new Promise((resolve, reject) => {
-    s3.listObjects(params, (err, objects) => {
-      if (err) {
-        reject(
-          console.log({
-            message: "Error finding the bucket content",
-            error: err,
-          })
-        );
-      } else {
-        resolve(objects);
-      }
+  try {
+    const data = await s3.listObjects(params).promise();
+    const contents = data["Contents"];
+    const oldest = contents.reduce((a, b) =>
+      a.LastModified < b.LastModified ? a : b
+    );
+    const stationId = oldest["Key"].slice(0, 3);
+    return stationId;
+  } catch (error) {
+    console.log({
+      message: "Error finding the bucket content",
+      error: error,
     });
-  });
-  const contents = p["Contents"];
-  const oldest = contents.reduce((a, b) =>
-    a.LastModified < b.LastModified ? a : b
-  );
-  const stationId = oldest["Key"].slice(0, 3);
-  return stationId;
+  }
 };
 
 export const get = async (key) => {

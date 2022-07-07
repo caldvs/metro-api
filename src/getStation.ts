@@ -1,12 +1,12 @@
 /* eslint-disable import/extensions */
 import type { StationResponse } from "./types/types";
 // eslint-disable-next-line import/no-unresolved
-import fetch from "./fetch";
+import { fetch } from "./fetch";
 // eslint-disable-next-line import/no-unresolved
-import transform from "./transform";
+import { transform } from "./transform";
 
 // eslint-disable-next-line import/no-unresolved
-import codeToDestination from "./lib/mapping";
+import { codeToDestination } from "./lib/mapping";
 
 const AWS = require("aws-sdk");
 
