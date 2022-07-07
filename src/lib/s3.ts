@@ -28,8 +28,7 @@ export const save = async (key, input) => {
 };
 
 export const getOldestFile = async (): Promise<string> => {
-  const env = process.env.environment;
-  const bucketName = `first-and-last-trams-${env}`;
+  const bucketName = `first-and-last-trams-dev`;
   const params = {
     Bucket: bucketName,
   };
