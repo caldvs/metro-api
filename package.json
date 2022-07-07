@@ -5,8 +5,8 @@
   "scripts": {
     "build:ts": "tsc --incremental",
     "invoke:station": "npm run-s build:ts && serverless invoke local --function station --data '{ \"pathParameters\": {\"stationId\":\"SPS\"}}'",
-    "test": "jest",
-    "lint": "npx eslint src test",
+    "test": "npm run-s build:ts && jest",
+    "lint": "npx eslint .",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "npx prettier src test --check",
     "prettier:fix": "npm run prettier -- --write",

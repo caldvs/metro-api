@@ -7,7 +7,7 @@ import type { StationResponse } from "./types/types";
 import fetch from "./fetch";
 // eslint-disable-next-line import/no-unresolved
 import transform from "./transform";
-import { codeToDestination } from "./lib/mapping";
+import codeToDestination from "./lib/mapping";
 
 export default async (stationId: string): Promise<StationResponse> => {
   const { data } = await fetch();
