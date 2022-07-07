@@ -33,19 +33,25 @@ export default async (stationId: string): Promise<StationResponse> => {
         Value: 1,
       },
     ],
-    Namespace: "my metrics" /* required */,
+    Namespace: "my metrics",
   };
 
-  const cloudwatch = new AWS.CloudWatch({ region: "eu-west-2" });
-  await cloudwatch
-    .putMetricData(metric, (err, data) => {
-      if (err) {
-        console.log(err, err.stack); // an error occurred
-      } else {
-        console.log(data); // successful response
-      }
-    })
-    .promise();
+  try {
+    const cloudwatch = new AWS.CloudWatch({ region: "eu-west-2" });
+    await cloudwatch
+      .putMetricData(metric, (err, data) => {
+        if (err) {
+          console.log(err, err.stack); // an error occurred
+        } else {
+          console.log(data); // successful response
+        }
+      })
+      .promise();
+  } catch (error) {
+    console.log("error putting stationId metric with params", metric);
+    console.log(error);
+  }
+
   const { departures, messages } = transform(data, stationId);
   return {
     version: `metro-api-${process.env.environment}`,
