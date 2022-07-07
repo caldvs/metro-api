@@ -20,8 +20,8 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - s3:*
-      Resource: "arn:aws:s3:::first-and-last-trams-dev/*"
+        - "s3:*"
+      Resource: "arn:aws:s3:::first-and-last-trams-dev"
     - Effect: "Allow"
       Action:
         - "cloudwatch:PutMetricData"
