@@ -12,6 +12,7 @@ export type StationResponse = {
   version: string;
   departures: DeparturesGroupedByDestination[];
   messages: string[];
+  firstAndLast: any;
 };
 
 export type PID = {
