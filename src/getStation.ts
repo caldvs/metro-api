@@ -13,6 +13,5 @@ export default async (stationId: string): Promise<StationResponse> => {
     version: `metro-api-${process.env.environment}`,
     departures,
     messages,
-    firstAndLast: ["06:00", "23:59"],
   };
 };
