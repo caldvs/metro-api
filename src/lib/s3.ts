@@ -43,8 +43,9 @@ export const getOldestFile = async (): Promise<string> => {
   } catch (error) {
     console.log({
       message: "Error finding the bucket content",
-      error: error,
+      error,
     });
+    throw new Error(error);
   }
 };
 
