@@ -5,9 +5,14 @@
   "scripts": {
     "build:ts": "tsc --incremental",
     "invoke:station": "npm run-s build:ts && serverless invoke local --function station --data '{ \"pathParameters\": {\"stationId\":\"SPS\"}}'",
+<<<<<<< HEAD
     "invoke:fal": "npm run-s build:ts && serverless invoke local --function firstAndLast",
     "test": "jest",
     "lint": "npx eslint src test",
+=======
+    "test": "npm run-s build:ts && jest",
+    "lint": "npx eslint .",
+>>>>>>> main
     "lint:fix": "npm run lint -- --fix",
     "prettier": "npx prettier src test --check",
     "prettier:fix": "npm run prettier -- --write",
@@ -17,7 +22,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "aws-sdk": "^2.1167.0",
+=======
+    "aws-sdk": "^2.1169.0",
+>>>>>>> main
     "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.12",
     "jest": "^28.1.2",

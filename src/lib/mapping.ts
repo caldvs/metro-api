@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export const allStations = [
   // "ABM",
   // "ALT",
@@ -116,6 +117,9 @@ export const allTerminus = [
 ];
 
 export const codeToDestination = (destination: string): string => {
+=======
+export default (destination: string): string => {
+>>>>>>> main
   const map = {
     ABM: "Abraham Moss",
     ALT: "Altrincham",
@@ -219,6 +223,7 @@ export const codeToDestination = (destination: string): string => {
   };
   return map[destination] || "";
 };
+<<<<<<< HEAD
 
 export const destinationToCode = (destination: string): string => {
   const map = {
@@ -1009,3 +1014,5 @@ export const stationCodeToPath = (code) => {
 //     path: "wythenshawe-town-centre",
 //   },
 // };
+=======
+>>>>>>> main
