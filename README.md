@@ -25,7 +25,6 @@ prod: `https://vh8bmjelah.execute-api.eu-west-2.amazonaws.com/{path}`
 ### Available paths
 
 - `/{stationId}` e.g. `SPS`, `NIS`, `CNK`
-- `/stations`
 
 
 ### Deployment
