@@ -1,6 +1,5 @@
 const AWS = require("aws-sdk");
 AWS.config.update({ region: "eu-west-2" });
-const cloudwatch = new AWS.CloudWatch({ apiVersion: "2010-08-01" });
 
 /* eslint-disable import/extensions */
 import type { StationResponse } from "./types/types";
@@ -12,18 +11,38 @@ import { codeToDestination } from "./lib/mapping";
 
 export default async (stationId: string): Promise<StationResponse> => {
   const { data } = await fetch();
-  const params = {
-    MetricData: {
-      MetricName: "station",
-      Timestamp: new Date(),
-      Value: codeToDestination(stationId),
-    },
-    Namespace: "FrequencyMonitoring",
+  const metric = {
+    MetricData: [
+      {
+        MetricName: "Request",
+        Dimensions: [
+          {
+            Name: "stationId",
+            Value: stationId,
+          },
+          {
+            Name: "stationName",
+            Value: codeToDestination(stationId),
+          },
+        ],
+        Timestamp: new Date(),
+        Unit: "Count",
+        Value: 1,
+      },
+    ],
+    Namespace: "my metrics" /* required */,
   };
-  cloudwatch.putMetricData(params, (err: any, data: any) => {
-    if (err) console.log(err, err.stack); // an error occurred
-    console.log(JSON.stringify(params));
-  });
+
+  const cloudwatch = new AWS.CloudWatch({ region: "eu-west-2" });
+  await cloudwatch
+    .putMetricData(metric, (err, data) => {
+      if (err) {
+        console.log(err, err.stack); // an error occurred
+      } else {
+        console.log(data); // successful response
+      }
+    })
+    .promise();
   const { departures, messages } = transform(data, stationId);
   return {
     version: `metro-api-${process.env.environment}`,
