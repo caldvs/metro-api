@@ -8,11 +8,14 @@ plugins:
   - serverless-plugin-typescript
   - serverless-dotenv-plugin
 
+custom:
+  bucket: first-and-last-trams-${opt:stage, self:provider.stage} #unique global name it will create for the bucket
+
 Resources:
   Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: "arn:aws:s3:::first-and-last-trams-${opt:stage, self:provider.stage}" # Getting the name of table I defined under custom in serverless.yml
+      BucketName: ${self:custom.bucket} # Getting the name of table I defined under custom in serverless.yml
   # Make Bucket publicly accessable
   MyBucketPolicy:
     Type: AWS::S3::BucketPolicy
@@ -23,7 +26,7 @@ Resources:
             - Effect: Allow
               Principal: '*' # public access to access the bucket files 
               Action: s3:*
-              Resource: 'arn:aws:s3:::first-and-last-trams-${opt:stage, self:provider.stage}/*'
+              Resource: 'arn:aws:s3:::${self:custom.bucket}/*'
 
 provider:
   name: aws
