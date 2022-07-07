@@ -21,6 +21,7 @@ provider:
     - Effect: "Allow"
       Action:
         - "cloudwatch:PutMetricData"
+      Resource: "*"
 
 functions:
   station:
