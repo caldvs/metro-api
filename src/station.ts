@@ -14,7 +14,9 @@ const AWS = require("aws-sdk");
 
 AWS.config.update({ region: "eu-west-2" });
 
-export const station = async (stationId: string): Promise<StationResponse> => {
+export const station = async (
+  stationId: string = "SPS"
+): Promise<StationResponse> => {
   const { data } = await fetch();
   const metric = {
     MetricData: [

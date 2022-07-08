@@ -32,7 +32,7 @@ export const transform = ({ value }, stationId): TransformationResponse => {
     return {
       code: destinationToCode(destination),
       destination,
-      mins,
+      mins: mins.sort(),
     };
   });
 

@@ -1,4 +1,9 @@
+import { station } from "../src/station";
+import { fetch } from "../src/fetch";
+
 const { transform } = require("../src/transform.ts");
+
+jest.mock("fetch");
 
 const fullDataResponse = require("./data/full.json");
 
