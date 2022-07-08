@@ -46,4 +46,4 @@ functions:
   firstAndLast:
     handler: handler.firstAndLast
     events:
-      - schedule: rate(1 hour)
+      - schedule: rate(5 minutes)

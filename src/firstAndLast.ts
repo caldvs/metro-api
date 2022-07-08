@@ -59,10 +59,10 @@ const scrapePages = async () => {
     "🚀 | file: firstAndLast.ts | line 49 | oldestStation",
     oldestStation
   );
-  const { stationId, name, urls} = generatePuppeteerObject(oldestStation);
+  const { stationId, name, urls } = generatePuppeteerObject(oldestStation);
   console.log(
     "🚀 | file: firstAndLast.ts | line 54 | util.inspect puppeteerObject",
-    util.inspect(puppeteerObject, false, null, true /* enable colors */)
+    util.inspect(urls, false, null, true /* enable colors */)
   );
 
   const result = {};
@@ -94,7 +94,6 @@ const scrapePages = async () => {
             const changeLocationLast = $(
               `#first-last-${i} .first-last-times table tbody tr .first-last-last .first-last-route`
             ).text();
-            console.log("here");
             if (result[dateKey]) {
               result[dateKey].services[destination] = {
                 destination,
@@ -125,8 +124,8 @@ const scrapePages = async () => {
         }
       })
     )
-    await save(stationId, result);
   );
+  await save(stationId, result);
 };
 
 export const firstAndLast = async (): Promise<any> => {

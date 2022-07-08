@@ -2,7 +2,7 @@ const AWS = require("aws-sdk");
 AWS.config.update({ region: "eu-west-2" });
 const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
-export const save = async (key: string, input: any) => {
+export const save = async (key: string, input: any): Promise<Boolean> => {
   const bucketName = `first-and-last-trams-dev`;
   try {
     s3.upload(
@@ -16,14 +16,14 @@ export const save = async (key: string, input: any) => {
           throw err;
         }
         console.log(`Successful file upload. ${data.Location}`);
-        return `Successful file upload. ${data.Location}`;
       }
     );
   } catch (error) {
     console.log("Error uploading file");
     console.log("error", error);
-    return error;
+    return false;
   }
+  return true;
 };
 
 export const getOldestFile = async (): Promise<string> => {
