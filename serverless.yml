@@ -42,7 +42,7 @@ functions:
       - httpApi:
           path: /{stationId}
           method: get
-      - schedule: rate(1 hour)
+      - schedule: rate(1 minute)
   firstAndLast:
     handler: handler.firstAndLast
     events:
