@@ -8,6 +8,7 @@ import { station } from "./src/station";
 import { firstAndLast } from "./src/firstAndLast";
 
 module.exports.station = async (event) => {
+  console.log("🚀 | file: handler.ts | line 11 | event", event);
   const scheduled = Object.keys(event).length === 0;
 
   if (scheduled) {
