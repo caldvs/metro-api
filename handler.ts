@@ -1,8 +1,10 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-import-module-exports */
+
+// eslint-disable-next-line import/extensions
 import { station } from "./src/station";
 
-// const station = require("./src/station.ts");
+// eslint-disable-next-line import/extensions
 import { firstAndLast } from "./src/firstAndLast";
 
 module.exports.station = async ({ pathParameters: { stationId } }) => {
@@ -18,5 +20,5 @@ module.exports.station = async ({ pathParameters: { stationId } }) => {
 };
 
 module.exports.firstAndLast = async () => {
-  return firstAndLast();
+  firstAndLast();
 };
