@@ -20,8 +20,8 @@ export const station = async (stationId: string): Promise<StationResponse> => {
   return {
     version: `metro-api-${process.env.environment}`,
     station: stationId,
-    departures,
     messages,
+    departures,
     firstAndLast,
   };
 };
