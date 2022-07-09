@@ -4,10 +4,7 @@
 // eslint-disable-next-line import/extensions
 import { station } from "./src/station";
 
-// eslint-disable-next-line import/extensions
-import { firstAndLast } from "./src/firstAndLast";
-
-module.exports.station = async (event) => {
+module.exports.run = async (event) => {
   const stationId = event?.pathParameters?.stationId;
 
   if (!stationId) {
@@ -30,8 +27,4 @@ module.exports.station = async (event) => {
     },
     body: JSON.stringify(data, null, 2),
   };
-};
-
-module.exports.firstAndLast = async () => {
-  await firstAndLast();
 };
