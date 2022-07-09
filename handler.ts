@@ -20,5 +20,5 @@ module.exports.station = async ({ pathParameters: { stationId } }) => {
 };
 
 module.exports.firstAndLast = async () => {
-  firstAndLast();
+  await firstAndLast();
 };
