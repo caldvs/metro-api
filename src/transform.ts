@@ -28,11 +28,12 @@ export const transform = ({ value }, stationId): TransformationResponse => {
             platform[key] === destination && Number(platform[WAIT_KEYS[i]])
         ).filter((min) => min === 0 || min)
       )
+      .sort()
       .flat();
     return {
       code: destinationToCode(destination),
       destination,
-      mins: mins.sort(),
+      mins,
     };
   });
 
