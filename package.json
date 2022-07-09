@@ -4,7 +4,7 @@
   "main": "handler.js",
   "scripts": {
     "build:ts": "tsc --incremental",
-    "invoke:station": "npm run-s build:ts && serverless invoke local --function station --data '{ \"pathParameters\": {\"stationId\":\"SPS\"}}'",
+    "invoke:station": "npm run-s build:ts && serverless invoke local --function station",
     "invoke:firstAndLast": "npm run-s build:ts && serverless invoke local --function firstAndLast",
     "test": "npm run-s build:ts && jest",
     "lint": "npx eslint .",

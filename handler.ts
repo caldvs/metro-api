@@ -7,7 +7,8 @@ import { station } from "./src/station";
 // eslint-disable-next-line import/extensions
 import { firstAndLast } from "./src/firstAndLast";
 
-module.exports.station = async ({ pathParameters: { stationId } }) => {
+module.exports.station = async (event) => {
+  const stationId = event?.pathParameters?.stationId || "SPS";
   const data = await station(stationId);
   return {
     statusCode: 200,
