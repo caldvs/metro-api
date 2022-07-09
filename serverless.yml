@@ -13,6 +13,9 @@ custom:
     collectLambdaLogs: false
     disableAwsSpans: true
     disableHttpSpans: true
+  enabled:
+    dev: rate(12 hours)
+    prod: rate(1 hour)
 
 provider:
   name: aws
@@ -51,4 +54,4 @@ functions:
   firstAndLast:
     handler: handler.firstAndLast
     events:
-      - schedule: rate(1 hour)
+      - schedule: ${self:custom.enabled.${opt:stage, self:provider.stage}}
