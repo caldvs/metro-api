@@ -13,9 +13,12 @@ custom:
     collectLambdaLogs: false
     disableAwsSpans: true
     disableHttpSpans: true
-  enabled:
+  firstAndLastSchedule:
     dev: rate(12 hours)
     prod: rate(1 hour)
+  stationSchedule:
+    dev: rate(12 hours)
+    prod: rate(1 minute)
 
 provider:
   name: aws
@@ -50,8 +53,8 @@ functions:
       - httpApi:
           path: /{stationId}
           method: get
-      - schedule: rate(1 minute)
+      - schedule: ${self:custom.stationSchedule.${opt:stage, self:provider.stage}}
   firstAndLast:
     handler: handler.firstAndLast
     events:
-      - schedule: ${self:custom.enabled.${opt:stage, self:provider.stage}}
+      - schedule: ${self:custom.firstAndLastSchedule.${opt:stage, self:provider.stage}}
