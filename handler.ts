@@ -8,21 +8,18 @@ import { station } from "./src/station";
 import { firstAndLast } from "./src/firstAndLast";
 
 module.exports.station = async (event) => {
-  console.log("🚀 | file: handler.ts | line 11 | event", event);
-  const scheduled = Object.keys(event).length === 0;
+  const stationId = event?.pathParameters?.stationId;
 
-  if (scheduled) {
+  if (!stationId) {
     return {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true,
       },
-      body: "Scheduled",
+      body: "No stationId. Probably scheduled.",
     };
   }
-
-  const stationId = event?.pathParameters?.stationId || "SPS";
 
   const data = await station(stationId);
   return {
