@@ -8,7 +8,12 @@ plugins:
   - serverless-plugin-typescript
   - serverless-dotenv-plugin
 
-	
+custom:
+  enterprise:
+  collectLambdaLogs: false
+  disableAwsSpans: true
+  disableHttpSpans: true
+
 provider:
   name: aws
   runtime: nodejs14.x
