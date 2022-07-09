@@ -8,7 +8,24 @@ import { fetch } from "./fetch";
 import { transform } from "./transform";
 import { postMetric } from "./lib/postMetric";
 
-export const station = async (stationId: string): Promise<StationResponse> => {
+const generateResponseBody = (body) => {
+  return {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": "true",
+    },
+    body: JSON.stringify(body, null, 2),
+  };
+};
+
+export const station = async (event): Promise<StationResponse> => {
+  const stationId = event?.pathParameters?.stationId;
+
+  if (!stationId) {
+    return generateResponseBody("No stationId. Probably scheduled.");
+  }
+
   const { data } = await fetch();
 
   if (process.env.environment === "prod") {
@@ -17,11 +34,14 @@ export const station = async (stationId: string): Promise<StationResponse> => {
 
   const { departures, messages } = transform(data, stationId);
   const firstAndLast = await get(stationId);
-  return {
+
+  const stationObject = {
     version: `metro-api-${process.env.environment}`,
     station: stationId,
     messages,
     departures,
     firstAndLast,
   };
+
+  return generateResponseBody(stationObject);
 };

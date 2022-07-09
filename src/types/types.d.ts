@@ -8,12 +8,21 @@ export type TransformationResponse = {
   messages: string[];
 };
 
-export type StationResponse = {
+export type Station = {
   version: string;
   station: string;
   departures: DeparturesGroupedByDestination[];
   messages: string[];
   firstAndLast: any;
+};
+
+export type StationResponse = {
+  statusCode: number;
+  headers: {
+    "Access-Control-Allow-Origin": string;
+    "Access-Control-Allow-Credentials": string;
+  };
+  body: string;
 };
 
 export type PID = {

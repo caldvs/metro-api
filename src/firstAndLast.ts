@@ -55,15 +55,16 @@ const generatePuppeteerObject = (stationId: string): PuppeteerObject => {
 
 const scrapePages = async () => {
   const oldestStation = await getOldestFile();
-  console.log(
-    "🚀 | file: firstAndLast.ts | line 49 | oldestStation",
-    oldestStation
-  );
-  const { stationId, name, urls } = generatePuppeteerObject(oldestStation);
-  console.log(
-    "🚀 | file: firstAndLast.ts | line 54 | util.inspect puppeteerObject",
-    util.inspect(urls, false, null, true /* enable colors */)
-  );
+  console.log("🚀 | Getting: ", oldestStation);
+  // console.log(
+  //   "🚀 | file: firstAndLast.ts | line 49 | oldestStation",
+  //   oldestStation
+  // );
+  const { stationId, urls } = generatePuppeteerObject(oldestStation);
+  // console.log(
+  //   "🚀 | file: firstAndLast.ts | line 54 | util.inspect puppeteerObject",
+  //   util.inspect(urls, false, null, true /* enable colors */)
+  // );
 
   const result = {};
   Promise.all(

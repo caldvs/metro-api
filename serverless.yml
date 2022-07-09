@@ -48,13 +48,13 @@ provider:
 
 functions:
   station:
-    handler: station.run
+    handler: handler.station
     events:
       - httpApi:
           path: /{stationId}
           method: get
       - schedule: ${self:custom.stationSchedule.${opt:stage, self:provider.stage}}
   firstAndLast:
-    handler: firstAndLast.run
+    handler: handler.firstAndLast
     events:
       - schedule: ${self:custom.firstAndLastSchedule.${opt:stage, self:provider.stage}}
