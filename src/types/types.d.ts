@@ -10,6 +10,7 @@ export type TransformationResponse = {
 
 export type StationResponse = {
   version: string;
+  station: string;
   departures: DeparturesGroupedByDestination[];
   messages: string[];
   firstAndLast: any;
