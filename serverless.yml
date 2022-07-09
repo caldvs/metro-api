@@ -10,9 +10,9 @@ plugins:
 
 custom:
   enterprise:
-  collectLambdaLogs: false
-  disableAwsSpans: true
-  disableHttpSpans: true
+    collectLambdaLogs: false
+    disableAwsSpans: true
+    disableHttpSpans: true
 
 provider:
   name: aws
