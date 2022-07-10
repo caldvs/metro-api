@@ -1,4 +1,4 @@
-import type { TransformationResponse, PID } from "./types/types";
+import type { TransformationResponse, PID } from "./types/station";
 import { destinationToCode } from "./lib/mapping";
 
 const _ = require("lodash");

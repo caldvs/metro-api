@@ -1,41 +1,21 @@
 import {
-  allStations,
   allTerminus,
-  stationCodeToPath,
+  codeToPath,
   codeToDestination,
   destinationToCode,
 } from "./lib/mapping";
 import { save, getOldestFile } from "./lib/s3";
 import { getMonthFromString } from "./lib/date";
 
+import type { PuppeteerObject } from "./types/firstAndLast";
+
 const util = require("util");
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-type puppeteerScrapeInput = {
-  code: string;
-  urls: destinationUrls[];
-};
-
-type destinationUrls = {
-  destination: string;
-  target: string;
-};
-
-type URLObject = {
-  destination: string;
-  target: string;
-};
-
-type PuppeteerObject = {
-  stationId: string;
-  name: string;
-  urls: URLObject[];
-};
-
 const generateUrl = (start: string, end: string): string => {
-  const from = stationCodeToPath(start);
-  const to = stationCodeToPath(end);
+  const from = codeToPath(start);
+  const to = codeToPath(end);
   return `https://tfgm.com/public-transport/tram/stops/${from}-tram/tram-schedule/${to}-tram#tram-schedule-panel`;
 };
 
@@ -56,10 +36,6 @@ const generatePuppeteerObject = (stationId: string): PuppeteerObject => {
 const scrapePages = async () => {
   const oldestStation = await getOldestFile();
   console.log("🚀 | Getting: ", oldestStation);
-  // console.log(
-  //   "🚀 | file: firstAndLast.ts | line 49 | oldestStation",
-  //   oldestStation
-  // );
   const { stationId, urls } = generatePuppeteerObject(oldestStation);
   // console.log(
   //   "🚀 | file: firstAndLast.ts | line 54 | util.inspect puppeteerObject",

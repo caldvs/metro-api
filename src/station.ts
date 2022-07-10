@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-import-module-exports */
-import type { StationResponse } from "./types/types";
+import type { StationResponse } from "./types/station";
 
 import { get } from "./lib/s3";
 import { fetch } from "./fetch";
