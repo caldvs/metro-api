@@ -4,20 +4,20 @@ const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
 export const save = async (key: string, input: any): Promise<Boolean> => {
   const bucketName = `first-and-last-trams-dev`;
+  const payload = {
+    Bucket: bucketName,
+    Key: `${key}.json`,
+    Body: JSON.stringify(input),
+  };
   try {
-    s3.upload(
-      {
-        Bucket: bucketName,
-        Key: `${key}.json`,
-        Body: JSON.stringify(input),
-      },
-      (err: any, data: any) => {
+    await s3
+      .upload(payload, (err: any, data: any) => {
         if (err) {
           throw err;
         }
-        console.log(`Successful file upload. ${data.Location}`);
-      }
-    ).promise();
+        console.log(`🚀 | Successful file upload. ${data.Location}`);
+      })
+      .promise();
   } catch (error) {
     console.log("Error uploading file");
     console.log("error", error);
