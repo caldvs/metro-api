@@ -17,7 +17,7 @@ export const save = async (key: string, input: any): Promise<Boolean> => {
         }
         console.log(`Successful file upload. ${data.Location}`);
       }
-    );
+    ).promise();
   } catch (error) {
     console.log("Error uploading file");
     console.log("error", error);
