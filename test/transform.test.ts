@@ -27,16 +27,18 @@ describe("transform", () => {
     it("should return an empty array if the station has no departures", () => {
       const stationId = "NIS";
       const mockData = {
-        value: [
-          {
-            TLAREF: "NIS",
-            AtcoCode: "9400ZZMANIS1",
-            Dest0: "",
-            Wait0: "",
-            MessageBoard:
-              "Welcome to Metrolink. Ticket checks are taking place across the network today. Please ensure you have a valid ticket before travelling. For up to date travel information visit www.TfGM.com.",
-          },
-        ],
+        data: {
+          value: [
+            {
+              TLAREF: "NIS",
+              AtcoCode: "9400ZZMANIS1",
+              Dest0: "",
+              Wait0: "",
+              MessageBoard:
+                "Welcome to Metrolink. Ticket checks are taking place across the network today. Please ensure you have a valid ticket before travelling. For up to date travel information visit www.TfGM.com.",
+            },
+          ],
+        },
       };
       const transformed = transform(mockData, stationId);
       expect(transformed).toEqual({
@@ -50,14 +52,16 @@ describe("transform", () => {
     it("should include wait times of 0", () => {
       const stationId = "NIS";
       const mockData = {
-        value: [
-          {
-            TLAREF: "NIS",
-            AtcoCode: "9400ZZMANIS1",
-            Dest0: "My house",
-            Wait0: "0",
-          },
-        ],
+        data: {
+          value: [
+            {
+              TLAREF: "NIS",
+              AtcoCode: "9400ZZMANIS1",
+              Dest0: "My house",
+              Wait0: "0",
+            },
+          ],
+        },
       };
       const transformed = transform(mockData, stationId);
       expect(transformed).toEqual({

@@ -8,8 +8,11 @@ const WAIT_KEYS = ["Wait0", "Wait1", "Wait2", "Wait3"];
 const TLAREF = "TLAREF";
 const ATCO_CODE = "AtcoCode";
 
-export const transform = ({ value }, stationId): TransformationResponse => {
-  const filteredByStationId = value.filter(
+export const transform = (
+  { data: { value } },
+  stationId
+): TransformationResponse => {
+  const filteredByStationId = Object.values(value).filter(
     (station) => station[TLAREF] === stationId
   );
   const filterByATCO = _.uniqBy(filteredByStationId, ATCO_CODE);

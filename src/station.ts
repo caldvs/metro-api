@@ -26,7 +26,7 @@ export const station = async (event): Promise<StationResponse> => {
     return generateResponseBody("No stationId. Probably scheduled.");
   }
 
-  const { data } = await fetch();
+  const data = await fetch();
 
   if (process.env.environment === "prod") {
     postMetric(stationId);

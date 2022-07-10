@@ -2,12 +2,14 @@ import axios from "axios";
 
 import { station } from "../handler";
 
+jest.mock("axios");
 const fullDataResponse = require("./data/full.json");
+
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("Station", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    jest.mock("axios");
   });
 
   it("should make an axios request for station data", async () => {
@@ -16,7 +18,10 @@ describe("Station", () => {
         stationId: "NIS",
       },
     };
-    (axios.get as jest.Mock).mockResolvedValue(fullDataResponse);
+
+    // Provide the data object to be returned
+    mockedAxios.get.mockResolvedValue(fullDataResponse);
+
     await station(event);
     expect(axios.get).toHaveBeenCalled();
   });
