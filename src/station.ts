@@ -7,6 +7,7 @@ import { get } from "./lib/s3";
 import { fetch } from "./fetch";
 import { transform } from "./transform";
 import { postMetric } from "./lib/postMetric";
+import { codeToDestination } from "./lib/mapping";
 
 const generateResponseBody = (body) => {
   return {
@@ -37,7 +38,8 @@ export const station = async (event): Promise<StationResponse> => {
 
   const stationObject = {
     version: `metro-api-${process.env.environment}`,
-    station: stationId,
+    stationId,
+    station: codeToDestination(stationId),
     messages,
     departures,
     firstAndLast,
