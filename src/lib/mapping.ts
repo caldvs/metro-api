@@ -228,6 +228,7 @@ export const destinationToCode = (destination: string): string => {
     "Ashton Moss": "ASM",
     "Ashton West": "ASW",
     "Ashton-under-Lyne": "ASH",
+    "Ashton-Under-Lyne": "ASH",
     Audenshaw: "AUD",
     Baguley: "BAG",
     "Barlow Moor Road": "BMR",
