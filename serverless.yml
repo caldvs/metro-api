@@ -15,9 +15,9 @@ custom:
     disableHttpSpans: true
   firstAndLastSchedule:
     dev: rate(12 hours)
-    prod: rate(1 minute)
+    prod: rate(1 hour)
   stationSchedule:
-    dev: rate(12 hours)
+    dev: rate(24 hours)
     prod: rate(1 minute)
 
 provider:
