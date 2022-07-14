@@ -5,6 +5,7 @@ const _ = require("lodash");
 
 const DEST_KEYS = ["Dest0", "Dest1", "Dest2", "Dest3"];
 const WAIT_KEYS = ["Wait0", "Wait1", "Wait2", "Wait3"];
+const CARRIAGES_KEYS = ["Carriages0", "Carriages1", "Carriages2", "Carriages3"];
 const TLAREF = "TLAREF";
 const ATCO_CODE = "AtcoCode";
 
@@ -33,10 +34,22 @@ export const transform = (
       )
       .sort()
       .flat();
+
+    const carriages = filterByATCO
+      .map((platform) =>
+        DEST_KEYS.map(
+          (key, i) =>
+            platform[key] === destination && platform[CARRIAGES_KEYS[i]]
+        ).filter((min) => min === 0 || min)
+      )
+      .sort()
+      .flat();
+
     return {
       code: destinationToCode(destination),
       destination,
       mins,
+      carriages,
     };
   });
 
