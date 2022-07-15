@@ -65,6 +65,6 @@ functions:
     handler: handler.lineStatus
     events:
       - httpApi:
-          path: /{action}
+          path: /lineStatus/{action}
           method: get
       - schedule: ${self:custom.lineStatusSchedule.${opt:stage, self:provider.stage}}
