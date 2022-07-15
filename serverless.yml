@@ -13,10 +13,13 @@ custom:
     collectLambdaLogs: false
     disableAwsSpans: true
     disableHttpSpans: true
+  stationSchedule:
+    dev: rate(24 hours)
+    prod: rate(1 minute)
   firstAndLastSchedule:
     dev: rate(12 hours)
     prod: rate(1 hour)
-  stationSchedule:
+  lineStatusSchedule:
     dev: rate(24 hours)
     prod: rate(1 minute)
 
@@ -58,3 +61,10 @@ functions:
     handler: handler.firstAndLast
     events:
       - schedule: ${self:custom.firstAndLastSchedule.${opt:stage, self:provider.stage}}
+  lineStatus:
+    handler: handler.lineStatus
+    events:
+      - httpApi:
+          path: /{action}
+          method: get
+      - schedule: ${self:custom.lineStatusSchedule.${opt:stage, self:provider.stage}}

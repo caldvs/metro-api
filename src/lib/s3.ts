@@ -62,3 +62,42 @@ export const get = async (key) => {
     return [];
   }
 };
+
+export const getS3LineStatus = async () => {
+  const bucketName = `line-status-dev`;
+  try {
+    const params = {
+      Bucket: bucketName,
+      Key: "status.json",
+    };
+    const data = (await s3.getObject(params).promise()).Body.toString("utf-8");
+    return JSON.parse(data);
+  } catch (error) {
+    console.log("Error getting file", error);
+    return [];
+  }
+};
+
+export const writeS3LineStatus = async (input: any) => {
+  const bucketName = `line-status-dev`;
+  const payload = {
+    Bucket: bucketName,
+    Key: "status.json",
+    Body: JSON.stringify(input),
+  };
+  try {
+    await s3
+      .upload(payload, (err: any, data: any) => {
+        if (err) {
+          throw err;
+        }
+        console.log(`🚀 | Successful file upload. ${data.Location}`);
+      })
+      .promise();
+  } catch (error) {
+    console.log("Error uploading file");
+    console.log("error", error);
+    return false;
+  }
+  return true;
+};

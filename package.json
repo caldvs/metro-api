@@ -6,6 +6,8 @@
     "build:ts": "tsc --incremental",
     "invoke:station": "npm run-s build:ts && serverless invoke local --function station",
     "invoke:firstAndLast": "npm run-s build:ts && serverless invoke local --function firstAndLast",
+    "invoke:lineStatusFetch": "npm run-s build:ts && serverless invoke local --function lineStatus",
+    "invoke:lineStatusRetrieve": "npm run-s build:ts && serverless invoke local --function lineStatus --data '{ \"pathParameters\": {\"action\":\"retrieve\"}}'",
     "test": "npm run-s build:ts && jest",
     "lint": "npx eslint .",
     "lint:fix": "npm run lint -- --fix",
