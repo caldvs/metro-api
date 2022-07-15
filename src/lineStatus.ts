@@ -5,9 +5,6 @@ import type { StationResponse } from "./types/station";
 
 import { getS3LineStatus, writeS3LineStatus } from "./lib/s3";
 import { fetchLineStatus } from "./fetchLineStatus";
-import { transform } from "./transform";
-import { postMetric } from "./lib/postMetric";
-import { codeToDestination } from "./lib/mapping";
 
 const generateResponseBody = (body) => {
   return {
@@ -20,16 +17,36 @@ const generateResponseBody = (body) => {
   };
 };
 
+const transform = (data) => {
+  const { items } = data;
+  return {
+    ...data,
+    items: [
+      items.map((item) => {
+        if (item.detail) {
+          return {
+            ...item,
+            detail: item.detail.replace(/<\/?[^>]+(>|$)/g, ""),
+          };
+        }
+        return {
+          ...item,
+        };
+      }),
+    ],
+  };
+};
+
 export const lineStatus = async (event): Promise<StationResponse> => {
   try {
     const action = event?.pathParameters?.action;
     if (action === "retrieve") {
       const response = await getS3LineStatus();
-      console.log("🚀 | file: lineStatus.ts | line 28 | response", response);
       return generateResponseBody(response);
     }
     const { data } = await fetchLineStatus();
-    await writeS3LineStatus(data);
+    const transformed = transform(data);
+    await writeS3LineStatus(transformed);
     return generateResponseBody("success");
   } catch (error) {
     console.log("🚀 | file: lineStatus.ts | line 34 | error", error);
