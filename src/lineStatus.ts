@@ -16,7 +16,7 @@ const generateResponseBody = (body) => {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Credentials": "true",
     },
-    body,
+    body: JSON.stringify(body, null, 2),
   };
 };
 
@@ -25,6 +25,7 @@ export const lineStatus = async (event): Promise<StationResponse> => {
     const action = event?.pathParameters?.action;
     if (action === "retrieve") {
       const response = await getS3LineStatus();
+      console.log("🚀 | file: lineStatus.ts | line 28 | response", response);
       return generateResponseBody(response);
     }
     const { data } = await fetchLineStatus();
