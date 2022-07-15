@@ -35,21 +35,24 @@ export const transform = (
       .sort()
       .flat();
 
-    const carriages = filterByATCO
+    const services = filterByATCO
       .map((platform) =>
-        DEST_KEYS.map(
-          (key, i) =>
-            platform[key] === destination && platform[CARRIAGES_KEYS[i]]
-        ).filter((min) => min === 0 || min)
+        DEST_KEYS.map((key, i) => {
+          if (platform[key] === destination) {
+            return {
+              mins: platform[WAIT_KEYS[i]],
+              carriages: platform[CARRIAGES_KEYS[i]],
+            };
+          }
+        }).filter(Boolean)
       )
-      .sort()
-      .flat();
-
+      .flat()
+      .filter((value) => value.length !== 0);
     return {
       code: destinationToCode(destination),
       destination,
       mins,
-      carriages,
+      services,
     };
   });
 

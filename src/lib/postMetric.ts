@@ -12,6 +12,10 @@ export const postMetric = async (stationId: string) => {
         MetricName: "Request",
         Dimensions: [
           {
+            Name: "Invocation",
+            Value: 1,
+          },
+          {
             Name: "stationId",
             Value: stationId,
           },
