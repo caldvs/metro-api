@@ -44,6 +44,7 @@ provider:
             - 's3:ListObjects'
           Resource:
             - 'arn:aws:s3:::first-and-last-trams-dev/*'
+            - 'arn:aws:s3:::line-status-dev/*'
         - Effect: "Allow"
           Action:
             - "cloudwatch:PutMetricData"
