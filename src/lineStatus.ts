@@ -21,11 +21,16 @@ const generateResponseBody = (body) => {
 };
 
 export const lineStatus = async (event): Promise<StationResponse> => {
-  const action = event?.pathParameters?.action;
-  if (action === "retrieve") {
-    const response = await getS3LineStatus();
-    return generateResponseBody(response);
+  try {
+    const action = event?.pathParameters?.action;
+    if (action === "retrieve") {
+      const response = await getS3LineStatus();
+      return generateResponseBody(response);
+    }
+    const { data } = await fetchLineStatus();
+    await writeS3LineStatus(data);
+    return generateResponseBody("success");
+  } catch (error) {
+    console.log("🚀 | file: lineStatus.ts | line 34 | error", error);
   }
-  const { data } = await fetchLineStatus();
-  await writeS3LineStatus(data);
 };
